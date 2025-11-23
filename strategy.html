@@ -1,304 +1,345 @@
 <html>
 <head>
 <meta charset='UTF-8'>
-<title>Daily Strategy</title>
+<title>QIAN Financial Times</title>
 
-<link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap' rel='stylesheet'>
 
 <style>
 body {
-  background: #0b1220;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: #14161c;
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
   padding: 24px;
   color: #e5e7eb;
 }
 .container {
-  max-width: 1100px;
-  margin: auto;
+  max-width: 1180px;
+  margin: 0 auto 40px auto;
 }
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-.brand-title {
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #e5e7eb;
-}
-.brand-sub {
-  font-size: 12px;
-  color: #9ca3af;
-}
-.top-right-info {
-  text-align: right;
-  font-size: 12px;
-  color: #9ca3af;
-}
-
-.card {
-  background: radial-gradient(circle at top left, #111827 0, #020617 50%, #020617 100%);
-  border-radius: 14px;
-  border: 1px solid rgba(148,163,184,0.35);
-  padding: 18px 20px;
-  margin-bottom: 18px;
-  box-shadow: 0 18px 45px rgba(15,23,42,0.85);
-}
-.card-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 10px;
 }
-.card-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #e5e7eb;
+.brand {
+  font-size: 26px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e5e0cf;
+  font-weight: 700;
 }
-.card-sub {
+.brand span.highlight {
+  color: #53a7ff;
+}
+.header-right {
   font-size: 12px;
   color: #9ca3af;
 }
-
-.time-row {
+.subheader-row {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  font-size: 12px;
-  margin-top: 6px;
+  margin-bottom: 10px;
 }
-.time-pill {
-  background: rgba(30,64,175,0.22);
-  color: #e5e7eb;
-  border: 1px solid rgba(129,140,248,0.4);
+.tag-pill {
+  background: #1f2933;
+  border: 1px solid #374151;
+  color: #d1d5db;
   border-radius: 999px;
   padding: 4px 10px;
-}
-.badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
   font-size: 11px;
-  color: #e5e7eb;
-  margin-right: 6px;
-}
-.badge-riskon {
-  background: linear-gradient(90deg, #16a34a, #22c55e);
-}
-.badge-riskoff {
-  background: linear-gradient(90deg, #dc2626, #f97316);
-}
-.badge-hedge {
-  background: #4b5563;
 }
 
-.news-grid {
+.fx-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.fx-pill {
+  background: linear-gradient(135deg, #111827, #020617);
+  border-radius: 999px;
+  border: 1px solid #374151;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: #e5e7eb;
+}
+
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 10px;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.card {
+  background: #111827;
+  border-radius: 12px;
+  border: 1px solid #374151;
+  padding: 18px 20px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55);
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #93c5fd;
+  margin-bottom: 10px;
+}
+
+.news-section {
+  margin-bottom: 16px;
+}
+.news-scroller {
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 .news-card {
-  background: rgba(15,23,42,0.9);
-  border-radius: 10px;
-  border: 1px solid rgba(148,163,184,0.35);
+  background: linear-gradient(135deg, #020617, #111827);
+  border-radius: 12px;
+  border: 1px solid #1f2937;
   padding: 10px 12px;
+  margin-bottom: 8px;
 }
 .news-source {
   font-size: 11px;
   color: #9ca3af;
-  margin-bottom: 4px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
-.news-title {
+.news-title a {
   font-size: 13px;
+  font-weight: 500;
   color: #e5e7eb;
   text-decoration: none;
-  line-height: 1.4;
 }
-.news-title:hover {
-  color: #38bdf8;
+.news-title a:hover {
+  text-decoration: underline;
+  color: #93c5fd;
 }
-
-.main-grid {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 14px;
-}
-@media (max-width: 900px) {
-  .main-grid {
-    grid-template-columns: 1fr;
-  }
+.news-desc {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #9ca3af;
 }
 
-pre {
-  white-space: pre-wrap;
+.strategy-text {
+  background: #020617;
+  border-radius: 10px;
+  padding: 10px 12px;
   font-family: Consolas, 'Fira Code', monospace;
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.6;
   color: #e5e7eb;
+  white-space: pre-wrap;
 }
-
-.weight-list {
-  margin-top: 6px;
-}
-.weight-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
-  font-size: 13px;
-}
-.w-symbol {
-  width: 50px;
-  font-weight: 600;
-  color: #e5e7eb;
-}
-.w-bar {
-  flex: 1;
-  height: 8px;
-  background: rgba(30,64,175,0.35);
+.badge {
+  display: inline-block;
+  padding: 3px 9px;
   border-radius: 999px;
-  margin: 0 8px;
-  overflow: hidden;
+  font-size: 11px;
+  margin-right: 6px;
+  color: #f9fafb;
 }
-.w-bar > span {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, #38bdf8, #22c55e);
+.badge-riskon {
+  background: #15803d;
 }
-.w-num {
-  width: 60px;
-  text-align: right;
-  color: #e5e7eb;
+.badge-riskoff {
+  background: #b91c1c;
+}
+.badge-hedge {
+  background: #4b5563;
+}
+.badge-score {
+  background: #4f46e5;
 }
 
-.fx-panel {
-  font-size: 13px;
+.weights-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 6px 0 0 0;
 }
-.fx-row {
+.weights-item {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 3px;
+  align-items: baseline;
+  padding: 4px 0;
+  border-bottom: 1px dotted #1f2933;
+  font-size: 12px;
 }
-.fx-code {
+.weights-item:last-child {
+  border-bottom: none;
+}
+.w-symbol {
   font-weight: 600;
   color: #e5e7eb;
 }
-.fx-rate {
-  color: #cbd5f5;
+.w-pct {
+  color: #93c5fd;
+  margin: 0 12px;
+  min-width: 60px;
+}
+.w-amt {
+  color: #fbbf24;
+  font-size: 11px;
 }
 
+.chart-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+.chart-grid.two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .chart-card {
-  margin-bottom: 14px;
+  background: #020617;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  padding: 10px;
 }
 .chart-title {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  color: #9ca3af;
   margin-bottom: 4px;
-  color: #e5e7eb;
 }
 .chart-img {
   max-width: 100%;
-  border-radius: 10px;
-  border: 1px solid rgba(55,65,81,0.8);
+  border-radius: 8px;
+  display: block;
 }
 
-.cn-card {
-  background: rgba(15,23,42,0.9);
-  border-radius: 12px;
-  border: 1px solid rgba(148,163,184,0.35);
-  padding: 10px 12px;
-  margin-bottom: 9px;
+.cn-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #facc15;
+  margin-bottom: 10px;
 }
-.cn-title {
+.cn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.cn-card {
+  background: #020617;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  padding: 10px 10px 8px 10px;
+}
+.cn-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+.cn-name {
   font-size: 13px;
   font-weight: 600;
-  margin-bottom: 4px;
   color: #e5e7eb;
 }
-.cn-price {
-  font-size: 12px;
-  color: #e5e7eb;
-  margin-bottom: 3px;
+.cn-code {
+  font-size: 11px;
+  color: #9ca3af;
 }
-.cn-trend {
-  font-size: 12px;
-  color: #facc15;
+.cn-body {
+  font-size: 11px;
+  color: #d1d5db;
   margin-bottom: 4px;
 }
-.cn-reason {
-  font-size: 12px;
-  color: #cbd5f5;
+.cn-body div {
+  margin-bottom: 2px;
 }
 
+.muted {
+  font-size: 11px;
+  color: #6b7280;
+}
 .footer {
+  margin-top: 14px;
   font-size: 11px;
   color: #6b7280;
   text-align: center;
-  margin-top: 12px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.input-row label {
+  font-size: 12px;
+  color: #d1d5db;
+}
+#total-amount {
+  background: #020617;
+  border-radius: 999px;
+  border: 1px solid #374151;
+  padding: 4px 10px;
+  color: #e5e7eb;
+  font-size: 12px;
+  width: 140px;
+}
+.calc-note {
+  font-size: 11px;
+  color: #9ca3af;
 }
 
 a {
-  color: #38bdf8;
-  text-decoration: none;
+  color: #60a5fa;
 }
 a:hover {
-  text-decoration: underline;
+  color: #93c5fd;
 }
 </style>
+
 </head>
 <body>
 <div class='container'>
 
-  <div class='top-bar'>
-    <div>
-      <div class='brand-title'>SLOU TERMINAL</div>
-      <div class='brand-sub'>Multi-Asset Daily Strategy Dashboard</div>
-    </div>
-    <div class='top-right-info'>
-      <div>Beijing: 2025-11-23 19:43:38</div>
-      <div>New York: 2025-11-23 06:43:38</div>
-      <div>US Market: US Market Closed (Weekend).</div>
-      <div>Version: 20251123.19</div>
+  <div class='header'>
+    <div class='brand'><span class='highlight'>QIAN</span> FINANCIAL TIMES</div>
+    <div class='header-right'>
+      Version 20251123.20 · Last Auto Run: 16h 24m ago
     </div>
   </div>
 
-  <!-- Global Headlines -->
-  <div class='card'>
-    <div class='card-header'>
-      <div class='card-title'>Global Macro & Markets — Last 3 Days</div>
-      <div class='card-sub'>Filtered financial & geopolitical headlines (ex-China politics)</div>
-    </div>
-    <div class='news-grid'><div class='news-card'><div class='news-source'>[Financial Times]</div><a href='https://www.ft.com/content/a32aa172-cfb1-4929-9841-e3aa6ee8c67d' target='_blank' class='news-title'>Lawmakers say US secretary of state rowed back on Ukraine peace plan</a></div><div class='news-card'><div class='news-source'>[Financial Times]</div><a href='https://www.ft.com/content/ee8acc59-5075-4b93-8b26-31302f0d0d9d' target='_blank' class='news-title'>Kyiv’s allies insist more work is needed on US-Russian peace plan</a></div><div class='news-card'><div class='news-source'>[Financial Times]</div><a href='https://www.ft.com/content/fde6003e-20f1-41b2-8691-47dd0d65fa21' target='_blank' class='news-title'>UK business blames long run-up to Budget for fuelling uncertainty</a></div><div class='news-card'><div class='news-source'>[Financial Times]</div><a href='https://www.ft.com/content/3bedace5-e1c3-4682-8751-7780a6aad3bc' target='_blank' class='news-title'>In defence of the weird and wonderful Wicked ‘womance’</a></div><div class='news-card'><div class='news-source'>[Financial Times]</div><a href='https://www.ft.com/content/1cb10fa7-49a8-46c0-bd8c-c31ec32f896e' target='_blank' class='news-title'>Starmer’s top business adviser emerges as frontrunner to replace Mandelson as envoy to US</a></div><div class='news-card'><div class='news-source'>[MarketWatch]</div><a href='https://www.marketwatch.com/story/we-almost-lost-10-000-my-late-father-in-laws-company-claimed-his-life-insurance-policy-didnt-exist-it-did-85d02a21?mod=mw_rss_topstories' target='_blank' class='news-title'>‘We almost lost $10,000’: My late father-in-law’s company claimed his life-insurance policy didn’t exist. It did.</a></div><div class='news-card'><div class='news-source'>[MarketWatch]</div><a href='https://www.marketwatch.com/story/my-retirement-is-completely-in-bitcoin-why-dont-more-people-do-what-i-do-34665250?mod=mw_rss_topstories' target='_blank' class='news-title'>‘My retirement is completely in bitcoin’: Why don’t more people do what I do?</a></div><div class='news-card'><div class='news-source'>[MarketWatch]</div><a href='https://www.marketwatch.com/story/theres-a-lot-of-tension-my-brother-and-i-manage-a-5-million-trust-how-do-we-solve-our-many-disagreements-20e57138?mod=mw_rss_topstories' target='_blank' class='news-title'>‘There’s a lot of tension’: My brother and I manage a $5 million trust. How do we solve our many disagreements?</a></div><div class='news-card'><div class='news-source'>[MarketWatch]</div><a href='https://www.marketwatch.com/story/ive-always-lived-hand-to-mouth-im-64-my-father-left-me-400k-from-his-457-b-plan-my-brother-is-suing-me-how-can-i-defend-myself-706e6c08?mod=mw_rss_topstories' target='_blank' class='news-title'>‘I’ve always lived hand-to-mouth’: I’m 64. My father left me $400K from his 457(b) plan. My brother is suing me. How can I defend myself?</a></div><div class='news-card'><div class='news-source'>[MarketWatch]</div><a href='https://www.marketwatch.com/story/americans-happiness-is-at-a-record-low-or-are-we-just-using-our-money-the-wrong-way-48be7f0e?mod=mw_rss_topstories' target='_blank' class='news-title'>Americans’ happiness is at a record low. Are we just using our money the wrong way?</a></div><div class='news-card'><div class='news-source'>[SCMP]</div><a href='https://www.scmp.com/news/asia/south-asia/article/3333853/ambani-zoo-india-cleared-probe-curbing-endangered-animal-imports?utm_source=rss_feed' target='_blank' class='news-title'>Ambani zoo, India cleared of probe curbing endangered animal imports</a></div><div class='news-card'><div class='news-source'>[SCMP]</div><a href='https://www.scmp.com/news/world/africa/article/3333849/africa-attracts-smaller-eu-nations-scrambling-influence?utm_source=rss_feed' target='_blank' class='news-title'>Africa attracts smaller EU nations scrambling for influence</a></div><div class='news-card'><div class='news-source'>[SCMP]</div><a href='https://www.scmp.com/news/hong-kong/society/article/3333846/ferry-smashes-hong-kongs-central-pier-damaging-structure?utm_source=rss_feed' target='_blank' class='news-title'>Ferry smashes into Hong Kong’s Central Pier, damaging structure</a></div><div class='news-card'><div class='news-source'>[SCMP]</div><a href='https://www.scmp.com/news/world/europe/article/3333843/italian-left-gathers-anti-meloni-campaign-despite-rivalries?utm_source=rss_feed' target='_blank' class='news-title'>Italian left gathers for anti-Meloni campaign despite rivalries</a></div><div class='news-card'><div class='news-source'>[SCMP]</div><a href='https://www.scmp.com/news/asia/south-asia/article/3333842/tejas-crash-dubai-air-show-deals-blow-indias-fighter-jet-export-ambitions?utm_source=rss_feed' target='_blank' class='news-title'>‘Dramatic failure’: Tejas crash deals blow to India’s jet export ambitions</a></div><div class='news-card'><div class='news-source'>[NBC]</div><a href='https://www.nbcnews.com/video/trump-says-28-point-ukraine-peace-plan-isn-t-his-final-offer-252686917955' target='_blank' class='news-title'>Trump says 28-point Ukraine peace plan isn’t his ‘final offer’</a></div><div class='news-card'><div class='news-source'>[NBC]</div><a href='https://www.nbcnews.com/world/europe/europe-meets-g20-sidelines-trumps-peace-plan-ukraine-rcna245298' target='_blank' class='news-title'>European leaders hope to strengthen peace plan in Ukraine&#39;s favor ahead of U.S. talks</a></div><div class='news-card'><div class='news-source'>[NBC]</div><a href='https://www.nbcnews.com/world/russia/teen-street-musician-became-face-kremlins-crackdown-rcna244316' target='_blank' class='news-title'>How a teen street musician became the face of the Kremlin&#39;s crackdown</a></div><div class='news-card'><div class='news-source'>[NBC]</div><a href='https://www.nbcnews.com/video/trump-calls-rep-marjorie-taylor-greene-a-nice-person-after-shock-resignation-252684357999' target='_blank' class='news-title'>Trump says Rep. Marjorie Taylor Greene a ‘nice person’ when asked about her shock resignation</a></div><div class='news-card'><div class='news-source'>[NBC]</div><a href='https://www.nbcnews.com/world/asia/japan-sanae-takaichi-sumo-ban-women-ring-rcna244308' target='_blank' class='news-title'>Japan&#39;s first female leader wrestles with sumo&#39;s ban on women</a></div><div class='news-card'><div class='news-source'>[ABC News]</div><a href='https://abcnews.go.com/International/officials-arrive-switzerland-talks-zelenskyy-laments-ongoing-russian/story?id=127796632' target='_blank' class='news-title'>Officials arrive for Switzerland talks as Zelenskyy laments ongoing Russian strikes</a></div><div class='news-card'><div class='news-source'>[ABC News]</div><a href='https://abcnews.go.com/Live/video/abcnews-live-41463246' target='_blank' class='news-title'>LIVE: ABC News Live</a></div><div class='news-card'><div class='news-source'>[ABC News]</div><a href='https://abcnews.go.com/Politics/doj-seeks-release-epstein-grand-jury-material-florida/story?id=127791342' target='_blank' class='news-title'>DOJ seeks release of Epstein grand jury material in Florida</a></div><div class='news-card'><div class='news-source'>[ABC News]</div><a href='https://abcnews.go.com/US/4-injured-shooting-north-carolina-tree-lighting-ceremony/story?id=127772621' target='_blank' class='news-title'>4 injured in shooting near Christmas tree lighting ceremony</a></div><div class='news-card'><div class='news-source'>[ABC News]</div><a href='https://abcnews.go.com/Politics/video/president-trump-congratulates-nyc-mayor-elect-zohran-mamdani-127767260' target='_blank' class='news-title'>WATCH: President Trump congratulates NYC mayor-elect Zohran Mamdani after WH meeting</a></div><div class='news-card'><div class='news-source'>[BBC]</div><a href='https://www.bbc.com/news/articles/c4g95x50kdyo?at_medium=RSS&at_campaign=rss' target='_blank' class='news-title'>US insists it authored Ukraine peace plan after claims of Russian &#39;wish list&#39;</a></div><div class='news-card'><div class='news-source'>[BBC]</div><a href='https://www.bbc.com/news/articles/c75vn7yel73o?at_medium=RSS&at_campaign=rss' target='_blank' class='news-title'>UN climate talks fail to secure new fossil fuel promises</a></div><div class='news-card'><div class='news-source'>[BBC]</div><a href='https://www.bbc.com/news/articles/cwywjz202r7o?at_medium=RSS&at_campaign=rss' target='_blank' class='news-title'>How Greene went from Maga loyalist to quitting Congress</a></div><div class='news-card'><div class='news-source'>[BBC]</div><a href='https://www.bbc.com/news/articles/c4gwgx803l5o?at_medium=RSS&at_campaign=rss' target='_blank' class='news-title'>Who killed young Chechen woman who fled Russia for a life of freedom?</a></div><div class='news-card'><div class='news-source'>[BBC]</div><a href='https://www.bbc.com/news/articles/cpd6qey9e4zo?at_medium=RSS&at_campaign=rss' target='_blank' class='news-title'>Man who grabbed Ariana Grande at premiere banned from Singapore</a></div></div>
+  <div class='subheader-row'>
+    <div class='tag-pill'>Beijing: 2025-11-24 05:07:55</div>
+    <div class='tag-pill'>New York: 2025-11-23 16:07:55</div>
+    <div class='tag-pill'>US Market Closed (Weekend).</div>
+    <div class='tag-pill'>RISK_ON — SPY ≥ 200-day MA</div>
+    <div class='tag-pill'>Score: 68.9 / 100 (Fair)</div>
   </div>
 
-  <div class='main-grid'>
+  <div class='fx-row'><div class='fx-pill'>1 USD ≈ 7.1061 CNY</div><div class='fx-pill'>1 GBP ≈ 9.3047 CNY</div><div class='fx-pill'>1 EUR ≈ 8.183 CNY</div><div class='fx-pill'>1 JPY ≈ 0.0454 CNY</div><div class='fx-pill'>1 HKD ≈ 0.9131 CNY</div><div class='fx-pill'>1 SGD ≈ 5.4411 CNY</div></div>
 
-    <!-- 左侧：策略 + 权重 + 回测 -->
-    <div>
-      <div class='card'>
-        <div class='card-header'>
-          <div class='card-title'>US Equity Strategy Snapshot</div>
-          <div class='card-sub'>Core holdings + momentum overlay · Medium-term style</div>
-        </div>
-        <div>
-          <span class='badge badge-riskon'>RISK_ON — SPY ≥ 200-day MA</span>
-          <span class='badge badge-hedge'>Hedge: Market normal → hedge usually not needed.</span>
-          <span class='badge badge-riskon'>Score: 67.5 / 100 (Fair)</span>
-        </div>
-        <div class='time-row'>
-          <div class='time-pill'>Last Auto Run: 7h 24m ago</div>
-        </div>
-        <pre>🔒 Forced holdings: VT, AOR, PLTR, VYM, SPY
+  <div class='grid'>
 
-📈 Extra picks (momentum + low vol):
-DAY, IVZ, EA
+    <!-- 左侧：全球新闻 -->
+    <div class='card news-section'>
+      <div class='card-title'>🌍 Global Headlines (last ~3 days)</div>
+      <div class='news-scroller'>
+        <p class='muted'>No fresh global headlines available.</p>
+      </div>
+    </div>
+
+    <!-- 右侧：美股策略 -->
+    <div class='card'>
+      <div class='card-title'>📈 US Portfolio Strategy</div>
+      <div style='margin-bottom:6px;'>
+        <span class='badge badge-riskon'>RISK_ON — SPY ≥ 200-day MA</span>
+        <span class='badge badge-hedge'>Hedge: Market normal → hedge usually not needed.</span>
+      </div>
+      <div class='strategy-text'>🔒 Forced holdings: VT, AOR, PLTR, VYM, SPY
+
+📈 Extra picks (momentum + low vol): WDC, MU, WBD
 
 🧺 Suggested portfolio:
-VT, AOR, PLTR, VYM, SPY, DAY, IVZ, EA
+VT, AOR, PLTR, VYM, SPY, WDC, MU, WBD
 
 🛡 Hedge:
 Market normal → hedge usually not needed.
@@ -309,45 +350,28 @@ SPY MA200 : 612.3
 State     : RISK_ON — SPY ≥ 200-day MA
 
 🔄 Rebalance (medium-term):
-Medium-term strategy — last rebalance 0 day(s) ago, consider waiting about 3 more day(s) unless market regime changes.
+Medium-term strategy — last rebalance 0 day(s) ago, no need to rebalance unless there is a big regime shift.
 
 ⏱ AutoRun:
-Last run: 7h 24m ago</pre>
-      </div>
-
-      <div class='card'>
-        <div class='card-header'>
-          <div class='card-title'>Suggested Weights — Mode C</div>
-          <div class='card-sub'>70% core (VT/AOR/PLTR/VYM/SPY) · 30% momentum (US picks)</div>
+Last run: 16h 24m ago</div>
+      <div style='margin-top:10px;'>
+        <div style='font-size:13px;font-weight:600;color:#bfdbfe;margin-bottom:4px;'>💼 Suggested Weights (optimized)</div>
+        <div class='input-row'>
+          <label for='total-amount'>Total capital (USD):</label>
+          <input id='total-amount' type='number' min='0' placeholder='e.g. 10000'>
         </div>
-        <div class='weight-list'><div class='weight-row'><span class='w-symbol'>AOR</span><span class='w-bar'><span style='width:34.67%'></span></span><span class='w-num'>34.67%</span></div><div class='weight-row'><span class='w-symbol'>VYM</span><span class='w-bar'><span style='width:16.54%'></span></span><span class='w-num'>16.54%</span></div><div class='weight-row'><span class='w-symbol'>VT</span><span class='w-bar'><span style='width:11.03%'></span></span><span class='w-num'>11.03%</span></div><div class='weight-row'><span class='w-symbol'>DAY</span><span class='w-bar'><span style='width:10.81%'></span></span><span class='w-num'>10.81%</span></div><div class='weight-row'><span class='w-symbol'>IVZ</span><span class='w-bar'><span style='width:10.78%'></span></span><span class='w-num'>10.78%</span></div><div class='weight-row'><span class='w-symbol'>EA</span><span class='w-bar'><span style='width:8.41%'></span></span><span class='w-num'>8.41%</span></div><div class='weight-row'><span class='w-symbol'>PLTR</span><span class='w-bar'><span style='width:3.88%'></span></span><span class='w-num'>3.88%</span></div><div class='weight-row'><span class='w-symbol'>SPY</span><span class='w-bar'><span style='width:3.88%'></span></span><span class='w-num'>3.88%</span></div></div>
-      </div>
-
-      <div class='card'>
-        <div class='card-header'>
-          <div class='card-title'>Portfolio Backtest (US Portfolio)</div>
-          <div class='card-sub'>1-year equity curve vs base = 1</div>
-        </div>
-        <img src='backtest_equity.png' class='chart-img'>
+        <div class='calc-note'>Enter your total capital to see recommended dollar allocation per stock.</div>
+        <ul class='weights-list'><li class='weights-item'><span class='w-symbol'>VT</span><span class='w-pct'>11.24%</span><span class='w-amt' data-symbol='VT' data-weight='11.24'>Amount: $0</span></li><li class='weights-item'><span class='w-symbol'>AOR</span><span class='w-pct'>11.24%</span><span class='w-amt' data-symbol='AOR' data-weight='11.24'>Amount: $0</span></li><li class='weights-item'><span class='w-symbol'>PLTR</span><span class='w-pct'>11.24%</span><span class='w-amt' data-symbol='PLTR' data-weight='11.24'>Amount: $0</span></li><li class='weights-item'><span class='w-symbol'>VYM</span><span class='w-pct'>11.24%</span><span class='w-amt' data-symbol='VYM' data-weight='11.24'>Amount: $0</span></li><li class='weights-item'><span class='w-symbol'>SPY</span><span class='w-pct'>11.24%</span><span class='w-amt' data-symbol='SPY' data-weight='11.24'>Amount: $0</span></li><li class='weights-item'><span class='w-symbol'>WDC</span><span class='w-pct'>14.61%</span><span class='w-amt' data-symbol='WDC' data-weight='14.61'>Amount: $0</span></li><li class='weights-item'><span class='w-symbol'>MU</span><span class='w-pct'>14.61%</span><span class='w-amt' data-symbol='MU' data-weight='14.61'>Amount: $0</span></li><li class='weights-item'><span class='w-symbol'>WBD</span><span class='w-pct'>14.61%</span><span class='w-amt' data-symbol='WBD' data-weight='14.61'>Amount: $0</span></li></ul>
       </div>
     </div>
 
-    <!-- 右侧：汇率 + 走势图 -->
-    <div>
-      <div class='card'>
-        <div class='card-header'>
-          <div class='card-title'>FX Board — CNY Crosses</div>
-          <div class='card-sub'>1 unit foreign currency in CNY (spot from Yahoo)</div>
-        </div>
-        <div class='fx-panel'><div class='fx-row'><span class='fx-code'>USD</span><span class='fx-rate'>1 USD ≈ 7.1061 CNY</span></div><div class='fx-row'><span class='fx-code'>EUR</span><span class='fx-rate'>1 EUR ≈ 8.1978 CNY</span></div><div class='fx-row'><span class='fx-code'>GBP</span><span class='fx-rate'>1 GBP ≈ 9.2998 CNY</span></div><div class='fx-row'><span class='fx-code'>JPY</span><span class='fx-rate'>1 JPY ≈ 0.0452 CNY</span></div><div class='fx-row'><span class='fx-code'>HKD</span><span class='fx-rate'>1 HKD ≈ 0.9127 CNY</span></div><div class='fx-row'><span class='fx-code'>SGD</span><span class='fx-rate'>1 SGD ≈ 5.4364 CNY</span></div></div>
-      </div>
+  </div> <!-- grid -->
 
-      <div class='card'>
-        <div class='card-header'>
-          <div class='card-title'>Forced Holdings Charts</div>
-          <div class='card-sub'>VT / AOR / PLTR / VYM / SPY</div>
-        </div>
-        <div class='chart-card'>
+  <!-- 美股图表 -->
+  <div class='card' style='margin-top:18px;'>
+    <div class='card-title'>US Core Holdings — Trend & Forecast</div>
+    <div class='chart-grid two-col'>
+      <div class='chart-card'>
   <div class='chart-title'>VT</div>
   <img src='chart_VT.png' class='chart-img'>
 </div>
@@ -367,95 +391,201 @@ Last run: 7h 24m ago</pre>
   <div class='chart-title'>SPY</div>
   <img src='chart_SPY.png' class='chart-img'>
 </div>
-      </div>
+    </div>
+  </div>
 
-      <div class='card'>
-        <div class='card-header'>
-          <div class='card-title'>Dynamic Picks Charts</div>
-          <div class='card-sub'>Momentum + low volatility US names</div>
-        </div>
-        <div class='chart-card'>
-  <div class='chart-title'>DAY</div>
-  <img src='chart_DAY.png' class='chart-img'>
+  <div class='card' style='margin-top:12px;'>
+    <div class='card-title'>US Dynamic Picks — Momentum & Low Volatility</div>
+    <div class='chart-grid two-col'>
+      <div class='chart-card'>
+  <div class='chart-title'>WDC</div>
+  <img src='chart_WDC.png' class='chart-img'>
 </div>
 <div class='chart-card'>
-  <div class='chart-title'>IVZ</div>
-  <img src='chart_IVZ.png' class='chart-img'>
+  <div class='chart-title'>MU</div>
+  <img src='chart_MU.png' class='chart-img'>
 </div>
 <div class='chart-card'>
-  <div class='chart-title'>EA</div>
-  <img src='chart_EA.png' class='chart-img'>
+  <div class='chart-title'>WBD</div>
+  <img src='chart_WBD.png' class='chart-img'>
 </div>
-      </div>
     </div>
   </div>
 
   <!-- 中国 & 港股专区 -->
-  <div class='card'>
-    <div class='card-header'>
-      <div class='card-title'>中国 & 港股预测 / 选股专区（中文）</div>
-      <div class='card-sub'>挑选最看好的 5–8 只中国相关标的，结合价格与技术走势给出简要分析</div>
+  <div class='card' style='margin-top:18px;'>
+    <div class='cn-section-title'>🇨🇳 中国 A 股中线策略（中文提示）</div>
+    <p class='muted'>说明：以下为中线参考仓位建议，偏向 1–3 个月持有周期，仅供研究与学习，不构成投资建议。</p>
+    <div class='cn-grid'>
+      <div class='cn-card'>
+  <div class='cn-header'>
+    <div class='cn-name'>贵州茅台</div>
+    <div class='cn-code'>600519.SS</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：横盘整理</div>
+    <div class='cn-hold'>建议持有时长：约 45 天</div>
+    <div class='cn-weight'>中线仓位建议：约 1%</div>
+  </div>
+  <img src='chart_CN_600519.SS.png' class='chart-img'>
+</div>
+<div class='cn-card'>
+  <div class='cn-header'>
+    <div class='cn-name'>中国平安</div>
+    <div class='cn-code'>601318.SS</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：温和上行趋势</div>
+    <div class='cn-hold'>建议持有时长：约 90 天</div>
+    <div class='cn-weight'>中线仓位建议：约 8%</div>
+  </div>
+  <img src='chart_CN_601318.SS.png' class='chart-img'>
+</div>
+<div class='cn-card'>
+  <div class='cn-header'>
+    <div class='cn-name'>五粮液</div>
+    <div class='cn-code'>000858.SZ</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：横盘整理</div>
+    <div class='cn-hold'>建议持有时长：约 45 天</div>
+    <div class='cn-weight'>中线仓位建议：约 1%</div>
+  </div>
+  <img src='chart_CN_000858.SZ.png' class='chart-img'>
+</div>
+<div class='cn-card'>
+  <div class='cn-header'>
+    <div class='cn-name'>宁德时代</div>
+    <div class='cn-code'>300750.SZ</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：温和上行趋势</div>
+    <div class='cn-hold'>建议持有时长：约 90 天</div>
+    <div class='cn-weight'>中线仓位建议：约 8%</div>
+  </div>
+  <img src='chart_CN_300750.SZ.png' class='chart-img'>
+</div>
+<div class='cn-card'>
+  <div class='cn-header'>
+    <div class='cn-name'>兴业银行</div>
+    <div class='cn-code'>601166.SS</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：横盘整理</div>
+    <div class='cn-hold'>建议持有时长：约 45 天</div>
+    <div class='cn-weight'>中线仓位建议：约 1%</div>
+  </div>
+  <img src='chart_CN_601166.SS.png' class='chart-img'>
+</div>
     </div>
-    <div class='cn-card'>
-  <div class='cn-title'>沪深300ETF (510300.SS)</div>
-  <div class='cn-price'>最新价格：4.564</div>
-  <div class='cn-trend'>技术走势偏多（近 30 日斜率向上）</div>
-  <div class='cn-reason'>宽基蓝筹，代表 A 股核心指数，适合作为中长期底仓。</div>
+  </div>
+
+  <div class='card' style='margin-top:12px;'>
+    <div class='cn-section-title'>🇭🇰 港股精选中线策略</div>
+    <p class='muted'>说明：港股波动较大，仓位建议通常略低于同类 A 股，仅供参考。</p>
+    <div class='cn-grid'>
+      <div class='cn-card'>
+  <div class='cn-header'>
+    <div class='cn-name'>腾讯控股</div>
+    <div class='cn-code'>0700.HK</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：温和上行趋势</div>
+    <div class='cn-hold'>建议持有时长：约 90 天</div>
+    <div class='cn-weight'>中线仓位建议：约 8%</div>
+  </div>
+  <img src='chart_CN_0700.HK.png' class='chart-img'>
 </div>
 <div class='cn-card'>
-  <div class='cn-title'>创业板ETF (159915.SZ)</div>
-  <div class='cn-price'>最新价格：2.904</div>
-  <div class='cn-trend'>技术走势偏多（近 30 日斜率向上）</div>
-  <div class='cn-reason'>成长风格代表，适合在风险偏好较强时提高配置。</div>
+  <div class='cn-header'>
+    <div class='cn-name'>建设银行</div>
+    <div class='cn-code'>0939.HK</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：温和上行趋势</div>
+    <div class='cn-hold'>建议持有时长：约 90 天</div>
+    <div class='cn-weight'>中线仓位建议：约 8%</div>
+  </div>
+  <img src='chart_CN_0939.HK.png' class='chart-img'>
 </div>
 <div class='cn-card'>
-  <div class='cn-title'>五粮液 (000858.SZ)</div>
-  <div class='cn-price'>最新价格：119.68</div>
-  <div class='cn-trend'>技术走势偏空（近 30 日斜率向下）</div>
-  <div class='cn-reason'>高端白酒龙头，盈利能力稳健，对宏观有一定对冲。</div>
+  <div class='cn-header'>
+    <div class='cn-name'>友邦保险</div>
+    <div class='cn-code'>1299.HK</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：温和上行趋势</div>
+    <div class='cn-hold'>建议持有时长：约 90 天</div>
+    <div class='cn-weight'>中线仓位建议：约 8%</div>
+  </div>
+  <img src='chart_CN_1299.HK.png' class='chart-img'>
 </div>
 <div class='cn-card'>
-  <div class='cn-title'>招商银行 (600036.SS)</div>
-  <div class='cn-price'>最新价格：43</div>
-  <div class='cn-trend'>技术走势偏多（近 30 日斜率向上）</div>
-  <div class='cn-reason'>优质股份行代表，资产质量相对稳健，受益利率周期改善。</div>
+  <div class='cn-header'>
+    <div class='cn-name'>中国平安(港)</div>
+    <div class='cn-code'>2318.HK</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：温和上行趋势</div>
+    <div class='cn-hold'>建议持有时长：约 90 天</div>
+    <div class='cn-weight'>中线仓位建议：约 8%</div>
+  </div>
+  <img src='chart_CN_2318.HK.png' class='chart-img'>
 </div>
 <div class='cn-card'>
-  <div class='cn-title'>中国平安 (601318.SS)</div>
-  <div class='cn-price'>最新价格：58.91</div>
-  <div class='cn-trend'>技术走势偏多（近 30 日斜率向上）</div>
-  <div class='cn-reason'>综合金融龙头，估值压缩后具备一定中长期修复空间。</div>
+  <div class='cn-header'>
+    <div class='cn-name'>阿里巴巴</div>
+    <div class='cn-code'>9988.HK</div>
+  </div>
+  <div class='cn-body'>
+    <div class='cn-trend'>趋势判断：温和上行趋势</div>
+    <div class='cn-hold'>建议持有时长：约 90 天</div>
+    <div class='cn-weight'>中线仓位建议：约 8%</div>
+  </div>
+  <img src='chart_CN_9988.HK.png' class='chart-img'>
 </div>
-<div class='cn-card'>
-  <div class='cn-title'>腾讯控股 (0700.HK)</div>
-  <div class='cn-price'>最新价格：610</div>
-  <div class='cn-trend'>技术走势偏多（近 30 日斜率向上）</div>
-  <div class='cn-reason'>互联网平台龙头，现金流充裕，游戏与广告业务恢复值得跟踪。</div>
-</div>
-<div class='cn-card'>
-  <div class='cn-title'>美团 (3690.HK)</div>
-  <div class='cn-price'>最新价格：95.55</div>
-  <div class='cn-trend'>技术走势偏多（近 30 日斜率向上）</div>
-  <div class='cn-reason'>本地生活与到店业务具备护城河，盈利能力持续改善值得关注。</div>
-</div>
-<div class='cn-card'>
-  <div class='cn-title'>Alibaba (US) (BABA)</div>
-  <div class='cn-price'>最新价格：152.93</div>
-  <div class='cn-trend'>技术走势偏空（近 30 日斜率向下）</div>
-  <div class='cn-reason'>US-listed ADR of Alibaba, liquidity good for USD accounts.</div>
-</div>
-<div class='cn-card'>
-  <div class='cn-title'>Tencent ADR (TCEHY)</div>
-  <div class='cn-price'>最新价格：79.04</div>
-  <div class='cn-trend'>技术走势偏空（近 30 日斜率向下）</div>
-  <div class='cn-reason'>Over-the-counter ADR tracking Tencent, for US portfolios.</div>
-</div>
+    </div>
   </div>
 
   <div class='footer'>
-    Auto-generated by R · Medium-term multi-asset view · Not investment advice.
+    Auto-generated by R · Data from Yahoo Finance & public RSS feeds · Not investment advice.
   </div>
 
 </div>
+
+<script>
+  // JS: 根据输入总金额计算每个股票的资金分配
+  const weightsData = [{symbol:'VT', weight:11.24},{symbol:'AOR', weight:11.24},{symbol:'PLTR', weight:11.24},{symbol:'VYM', weight:11.24},{symbol:'SPY', weight:11.24},{symbol:'WDC', weight:14.61},{symbol:'MU', weight:14.61},{symbol:'WBD', weight:14.61}];
+
+  function formatDollar(x) {
+    if (!isFinite(x)) return '$0';
+    if (x >= 1000) return '$' + x.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return '$' + x.toFixed(2);
+  }
+
+  function recalcAmounts() {
+    const input = document.getElementById('total-amount');
+    if (!input) return;
+    const total = parseFloat(input.value);
+    const spans = document.querySelectorAll('.w-amt');
+    if (isNaN(total) || total <= 0) {
+      spans.forEach(sp => sp.textContent = 'Amount: $0');
+      return;
+    }
+    spans.forEach(sp => {
+      const w = parseFloat(sp.getAttribute('data-weight'));
+      const amt = total * (w / 100.0);
+      sp.textContent = 'Amount: ' + formatDollar(amt);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('total-amount');
+    if (input) {
+      input.addEventListener('input', recalcAmounts);
+    }
+  });
+</script>
+
 </body>
 </html>
