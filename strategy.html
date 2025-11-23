@@ -1,273 +1,313 @@
 <html>
 <head>
 <meta charset='UTF-8'>
-<title>Daily Strategy</title>
+<title>Daily Strategy — SLou</title>
 
-<link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap' rel='stylesheet'>
 
 <style>
 body {
   margin: 0;
   padding: 24px;
-  background: radial-gradient(circle at top, #1f2937 0, #020617 45%, #000000 100%);
+  background: radial-gradient(circle at top left, #111827, #020617 55%, #000000 100%);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
   color: #e5e7eb;
 }
 .container {
-  max-width: 1120px;
+  max-width: 1400px;
   margin: 0 auto;
 }
+.layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr) 280px;
+  gap: 18px;
+}
 .card {
+  background: linear-gradient(145deg, #020617 0%, #020617 40%, #0b1120 100%);
+  border-radius: 18px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+  padding: 18px 20px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+}
+.card-soft {
   background: rgba(15,23,42,0.92);
-  border-radius: 14px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.65);
-  padding: 22px 26px;
-  margin-bottom: 22px;
-  border: 1px solid rgba(55,65,81,0.7);
-  backdrop-filter: blur(18px);
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 1px solid rgba(55, 65, 81, 0.6);
 }
 h1 {
-  font-size: 26px;
+  font-size: 24px;
   color: #e5e7eb;
   font-weight: 700;
-  margin: 0 0 4px 0;
+  margin: 0;
 }
 h2 {
-  font-size: 20px;
+  font-size: 18px;
   color: #60a5fa;
   font-weight: 600;
-  margin: 0 0 10px 0;
+  margin: 0 0 6px 0;
 }
-h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #e5e7eb;
+.section-title-line {
+  height: 2px;
+  width: 40px;
+  background: linear-gradient(90deg, #22c55e, #38bdf8);
+  border-radius: 999px;
+  margin-top: 4px;
 }
 .time-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin-top: 10px;
 }
 .time-pill {
-  background: rgba(15,23,42,0.9);
-  color: #e5e7eb;
+  background: rgba(30,64,175,0.15);
+  color: #bfdbfe;
   border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 13px;
+  padding: 5px 10px;
+  font-size: 12px;
   font-weight: 500;
-  border: 1px solid rgba(75,85,99,0.9);
+  border: 1px solid rgba(59,130,246,0.35);
 }
 .badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 12px;
+  display: inline-block;
+  padding: 4px 10px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 11px;
   color: #f9fafb;
-  margin-right: 8px;
+  margin-right: 6px;
 }
 .badge-riskon {
-  background: linear-gradient(120deg,#22c55e,#16a34a);
+  background: linear-gradient(135deg, #16a34a, #22c55e);
 }
 .badge-riskoff {
-  background: linear-gradient(120deg,#f97316,#dc2626);
+  background: linear-gradient(135deg, #dc2626, #f97316);
 }
 .badge-hedge {
-  background: linear-gradient(120deg,#6b7280,#4b5563);
+  background: linear-gradient(135deg, #6b7280, #4b5563);
 }
 pre {
   white-space: pre-wrap;
   font-family: Consolas, 'Fira Code', monospace;
-  font-size: 14px;
-  line-height: 1.7;
-  color: #e5e7eb;
-}
-.footer {
-  font-size: 11px;
-  color: #9ca3af;
-  text-align: center;
-  margin-top: 10px;
-}
-a {
-  color: #93c5fd;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-/* 新闻卡片 */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-  gap: 14px;
-}
-.news-card {
-  background: radial-gradient(circle at top,#111827 0,#020617 70%);
-  border-radius: 12px;
-  padding: 12px 14px;
-  border: 1px solid rgba(75,85,99,0.9);
-  min-height: 70px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.news-source {
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #9ca3af;
-  margin-bottom: 4px;
-}
-.news-title {
   font-size: 13px;
-  font-weight: 500;
+  line-height: 1.6;
   color: #e5e7eb;
-  line-height: 1.4;
 }
-
-/* FX chip */
+.muted {
+  font-size: 12px;
+  color: #9ca3af;
+}
+/* 权重卡片 */
+.weight-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+.weight-pill {
+  background: radial-gradient(circle at top left, #1f2937, #020617);
+  border-radius: 14px;
+  padding: 8px 10px;
+  min-width: 80px;
+  border: 1px solid rgba(75,85,99,0.9);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+.w-symbol {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+.w-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4ade80;
+}
+/* 汇率 */
 .fx-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 6px;
 }
-.fx-chip {
-  background: rgba(15,23,42,0.9);
-  border-radius: 999px;
-  padding: 6px 12px;
-  border: 1px solid rgba(55,65,81,0.9);
-  font-size: 12px;
-  display: flex;
-  flex-direction: column;
+.fx-pill {
+  padding: 6px 9px;
+  border-radius: 12px;
+  background: rgba(15,118,110,0.18);
+  border: 1px solid rgba(45,212,191,0.45);
 }
-.fx-cur {
+.fx-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #99f6e4;
+}
+.fx-rate {
+  font-size: 13px;
   font-weight: 600;
   color: #e5e7eb;
 }
-.fx-rate {
+/* 新闻卡片 */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+  margin-top: 6px;
+}
+.news-card {
+  background: radial-gradient(circle at top left, #111827, #020617);
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(55,65,81,0.9);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+.news-source {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+.news-title a {
+  font-size: 13px;
+  color: #e5e7eb;
+  text-decoration: none;
+}
+.news-title a:hover {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+/* 中国 & 港股 卡片 */
+.cn-card {
+  background: radial-gradient(circle at top left, #111827, #020617);
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(55,65,81,0.9);
+  margin-bottom: 8px;
+}
+.cn-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.cn-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+.cn-ticker {
   font-size: 11px;
   color: #9ca3af;
 }
-
-/* 权重 chips */
-.weight-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-.weight-chip {
-  background: linear-gradient(135deg,rgba(30,64,175,0.9),rgba(12,74,110,0.9));
-  border-radius: 999px;
-  padding: 6px 12px;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-  color: #f9fafb;
-  box-shadow: 0 8px 18px rgba(15,23,42,0.6);
-}
-.w-symbol {
-  font-weight: 600;
+.cn-body {
   font-size: 12px;
+  color: #d1d5db;
+  line-height: 1.5;
 }
-.w-num {
-  font-size: 12px;
-  opacity: 0.9;
-}
-
-/* 图表卡片 */
+/* 图表 */
 .chart-card {
-  background: radial-gradient(circle at top,#020617 0,#000000 70%);
-  border-radius: 12px;
-  padding: 10px 12px 14px 12px;
+  background: rgba(15,23,42,0.9);
+  border-radius: 14px;
+  padding: 8px 10px 6px 10px;
   border: 1px solid rgba(55,65,81,0.9);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .chart-title {
-  font-size: 13px;
+  font-size: 12px;
   color: #93c5fd;
-  margin-bottom: 6px;
-  font-weight: 600;
+  margin-bottom: 4px;
 }
 .chart-img {
-  max-width: 100%;
-  border-radius: 8px;
-  display: block;
+  width: 100%;
+  border-radius: 10px;
 }
-
-@media (max-width: 640px) {
-  body {
-    padding: 16px;
-  }
+/* 回测图 */
+.backtest-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 6px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.8);
+}
+a {
+  color: #60a5fa;
+}
+a:hover {
+  color: #93c5fd;
 }
 </style>
 </head>
+
 <body>
 <div class='container'>
+  <div class='layout'>
 
-  <!-- 顶部：时间 + 风险 + FX -->
-  <div class='card'>
-    <h1>📊 Daily Strategy — 2025-11-23</h1>
-    <div class='time-row'>
-      <div class='time-pill'>Beijing: 2025-11-23 18:36:50</div>
-      <div class='time-pill'>New York: 2025-11-23 05:36:50</div>
-      <div class='time-pill'>US Market Closed (Weekend)</div>
-      <div class='time-pill'>Version: 20251123.15</div>
-      <div class='time-pill'>Auto Run: 7h 19m ago</div>
+    <!-- 左侧：权重 + 汇率 -->
+    <div class='col-left'>
+      <div class='card-soft'>
+        <h2>US Portfolio Snapshot</h2>
+        <div class='section-title-line'></div>
+        <p class='muted' style='margin-top:6px;margin-bottom:4px;'>Optimized weights (core tilt · medium-term)</p>
+        <div class='weight-grid'><div class='weight-pill'><div class='w-symbol'>AOR</div><div class='w-value'>37.39%</div></div><div class='weight-pill'><div class='w-symbol'>WBD</div><div class='w-value'>21.37%</div></div><div class='weight-pill'><div class='w-symbol'>VYM</div><div class='w-value'>18.13%</div></div><div class='weight-pill'><div class='w-symbol'>VT</div><div class='w-value'>12.86%</div></div><div class='weight-pill'><div class='w-symbol'>PLTR</div><div class='w-value'>2.87%</div></div><div class='weight-pill'><div class='w-symbol'>SPY</div><div class='w-value'>2.75%</div></div><div class='weight-pill'><div class='w-symbol'>WDC</div><div class='w-value'>2.62%</div></div><div class='weight-pill'><div class='w-symbol'>MU</div><div class='w-value'>2.02%</div></div></div>
+      </div>
+
+      <div class='card-soft' style='margin-top:14px;'>
+        <h2>RMB FX Board</h2>
+        <div class='section-title-line'></div>
+        <p class='muted'>FX data temporarily unavailable.</p>
+      </div>
     </div>
-    <br/>
-    <div>
-      <span class='badge badge-riskon'>RISK_ON — SPY ≥ 200-day MA</span>
-      <span class='badge badge-hedge'>Hedge: Market normal → hedge usually not needed.</span>
-      <span class='badge badge-riskon'>Score: 68.9 / 100 (Fair)</span>
-    </div>
-    <br/>
-    <h2>FX — 1 Unit vs CNY</h2>
-    <div class='fx-grid'><div class='fx-chip'><div class='fx-cur'>1 USD</div><div class='fx-rate'>≈ 7.1146 CNY</div></div><div class='fx-chip'><div class='fx-cur'>1 GBP</div><div class='fx-rate'>≈ 9.3093 CNY</div></div><div class='fx-chip'><div class='fx-cur'>1 EUR</div><div class='fx-rate'>≈ 8.1956 CNY</div></div><div class='fx-chip'><div class='fx-cur'>1 JPY</div><div class='fx-rate'>≈ 0.0454 CNY</div></div><div class='fx-chip'><div class='fx-cur'>1 HKD</div><div class='fx-rate'>≈ 0.9141 CNY</div></div><div class='fx-chip'><div class='fx-cur'>1 SGD</div><div class='fx-rate'>≈ 5.4502 CNY</div></div></div>
+
+    <!-- 中间：新闻 + 中国/港股 + 图表 -->
+    <div class='col-main'>
+      <div class='card'>
+        <h2>Global Headlines</h2>
+        <div class='section-title-line'></div>
+        <div class='news-grid'><div class='news-card'><div class='news-source'>Financial Times</div><div class='news-title'><a href='https://www.ft.com/content/a32aa172-cfb1-4929-9841-e3aa6ee8c67d' target='_blank'>Lawmakers say US secretary of state rowed back on Ukraine peace plan</a></div></div><div class='news-card'><div class='news-source'>Financial Times</div><div class='news-title'><a href='https://www.ft.com/content/ee8acc59-5075-4b93-8b26-31302f0d0d9d' target='_blank'>Kyiv’s allies insist more work is needed on US-Russian peace plan</a></div></div><div class='news-card'><div class='news-source'>Forbes</div><div class='news-title'><a href='https://www.forbes.com/sites/hughmcintyre/2024/01/29/madonna-earns-the-biggest-hit-of-her-career-on-one-billboard-chart-this-week/' target='_blank'>Madonna Earns The Biggest Hit Of Her Career On One Billboard Chart This Week</a></div></div><div class='news-card'><div class='news-source'>Forbes</div><div class='news-title'><a href='https://www.forbes.com/sites/danidiplacido/2024/01/29/stanley-cup-tiktok-craze-has-hit-a-wall---of-lead/' target='_blank'>TikTok’s Stanley Cup Craze Has Hit A Wall — Of Lead</a></div></div><div class='news-card'><div class='news-source'>MarketWatch</div><div class='news-title'><a href='https://www.marketwatch.com/story/we-almost-lost-10-000-my-late-father-in-laws-company-claimed-his-life-insurance-policy-didnt-exist-it-did-85d02a21?mod=mw_rss_topstories' target='_blank'>‘We almost lost $10,000’: My late father-in-law’s company claimed his life-insurance policy didn’t exist. It did.</a></div></div><div class='news-card'><div class='news-source'>MarketWatch</div><div class='news-title'><a href='https://www.marketwatch.com/story/my-retirement-is-completely-in-bitcoin-why-dont-more-people-do-what-i-do-34665250?mod=mw_rss_topstories' target='_blank'>‘My retirement is completely in bitcoin’: Why don’t more people do what I do?</a></div></div></div>
+      </div>
+
+      <div class='card-soft' style='margin-top:14px;'>
+        <h2>China & HK Stock Radar · Top 5</h2>
+        <div class='section-title-line'></div>
+        <div class='cn-card'>
+  <div class='cn-header'>
+    <span class='cn-name'>宁德时代</span>
+    <span class='cn-ticker'>300750.SZ</span>
   </div>
-
-  <!-- 新闻卡片：放在最上方 -->
-  <div class='card'>
-    <h2>🌍 Global Financial Headlines</h2>
-    <div class='news-grid'><div class='news-card'><div class='news-source'>Financial Times</div><a class='news-title' href='https://www.ft.com/content/a32aa172-cfb1-4929-9841-e3aa6ee8c67d' target='_blank'>Lawmakers say US secretary of state rowed back on Ukraine peace plan</a></div><div class='news-card'><div class='news-source'>Financial Times</div><a class='news-title' href='https://www.ft.com/content/ee8acc59-5075-4b93-8b26-31302f0d0d9d' target='_blank'>Kyiv’s allies insist more work is needed on US-Russian peace plan</a></div><div class='news-card'><div class='news-source'>Forbes</div><a class='news-title' href='https://www.forbes.com/sites/hughmcintyre/2024/01/29/madonna-earns-the-biggest-hit-of-her-career-on-one-billboard-chart-this-week/' target='_blank'>Madonna Earns The Biggest Hit Of Her Career On One Billboard Chart This Week</a></div><div class='news-card'><div class='news-source'>Forbes</div><a class='news-title' href='https://www.forbes.com/sites/danidiplacido/2024/01/29/stanley-cup-tiktok-craze-has-hit-a-wall---of-lead/' target='_blank'>TikTok’s Stanley Cup Craze Has Hit A Wall — Of Lead</a></div><div class='news-card'><div class='news-source'>MarketWatch</div><a class='news-title' href='https://www.marketwatch.com/story/we-almost-lost-10-000-my-late-father-in-laws-company-claimed-his-life-insurance-policy-didnt-exist-it-did-85d02a21?mod=mw_rss_topstories' target='_blank'>‘We almost lost $10,000’: My late father-in-law’s company claimed his life-insurance policy didn’t exist. It did.</a></div><div class='news-card'><div class='news-source'>MarketWatch</div><a class='news-title' href='https://www.marketwatch.com/story/my-retirement-is-completely-in-bitcoin-why-dont-more-people-do-what-i-do-34665250?mod=mw_rss_topstories' target='_blank'>‘My retirement is completely in bitcoin’: Why don’t more people do what I do?</a></div></div>
+  <div class='cn-body'>宁德时代（300750.SZ）：近 120 日涨幅 46.4%，RSI ≈ 44.1，当前价格约 370。 股价站在 60 日线上方，趋势偏多，综合动量与技术评分位于样本前列。</div>
+</div>
+<div class='cn-card'>
+  <div class='cn-header'>
+    <span class='cn-name'>中国中免</span>
+    <span class='cn-ticker'>601888.SS</span>
   </div>
-
-  <!-- 策略概要 + 权重 -->
-  <div class='card'>
-    <h2>Strategy Summary</h2>
-    <pre>🔒 Forced holdings: VT, AOR, PLTR, VYM, SPY
-
-📈 Extra picks (momentum + low vol): WDC, MU, WBD
-
-🧺 Suggested portfolio:
-VT, AOR, PLTR, VYM, SPY, WDC, MU, WBD
-
-🛡 Hedge:
-Market normal → hedge usually not needed.
-
-⚠ Market Risk:
-SPY price : 659.03
-SPY MA200 : 612.3
-State     : RISK_ON — SPY ≥ 200-day MA
-
-🔄 Rebalance (medium horizon):
-Last rebalance date : 2025-11-23
-Days since last     : 0
-Suggestion          : Medium-horizon rule: 0 days since last rebalance — better to wait a bit longer.
-
-⏱ AutoRun status:
-Last run: 7h 19m ago</pre>
-    <h2>💼 Suggested Weights (core-tilted momentum)</h2>
-    <div class='weight-chips'><div class='weight-chip'><span class='w-symbol'>VT</span><span class='w-num'>2.41%</span></div><div class='weight-chip'><span class='w-symbol'>AOR</span><span class='w-num'>2.24%</span></div><div class='weight-chip'><span class='w-symbol'>PLTR</span><span class='w-num'>0.61%</span></div><div class='weight-chip'><span class='w-symbol'>VYM</span><span class='w-num'>2.12%</span></div><div class='weight-chip'><span class='w-symbol'>SPY</span><span class='w-num'>2.45%</span></div><div class='weight-chip'><span class='w-symbol'>WDC</span><span class='w-num'>35.77%</span></div><div class='weight-chip'><span class='w-symbol'>MU</span><span class='w-num'>27.65%</span></div><div class='weight-chip'><span class='w-symbol'>WBD</span><span class='w-num'>26.75%</span></div></div>
+  <div class='cn-body'>中国中免（601888.SS）：近 120 日涨幅 31.4%，RSI ≈ 49.5，当前价格约 79.05。 股价站在 60 日线上方，趋势偏多，综合动量与技术评分位于样本前列。</div>
+</div>
+<div class='cn-card'>
+  <div class='cn-header'>
+    <span class='cn-name'>中国平安(A股)</span>
+    <span class='cn-ticker'>601318.SS</span>
   </div>
+  <div class='cn-body'>中国平安(A股)（601318.SS）：近 120 日涨幅 15.7%，RSI ≈ 51.3，当前价格约 58.91。 股价站在 60 日线上方，趋势偏多，综合动量与技术评分位于样本前列。</div>
+</div>
+<div class='cn-card'>
+  <div class='cn-header'>
+    <span class='cn-name'>美的集团</span>
+    <span class='cn-ticker'>000333.SZ</span>
+  </div>
+  <div class='cn-body'>美的集团（000333.SZ）：近 120 日涨幅 4.8%，RSI ≈ 65.6，当前价格约 78.75。 股价站在 60 日线上方，趋势偏多，综合动量与技术评分位于样本前列。</div>
+</div>
+<div class='cn-card'>
+  <div class='cn-header'>
+    <span class='cn-name'>招商银行</span>
+    <span class='cn-ticker'>600036.SS</span>
+  </div>
+  <div class='cn-body'>招商银行（600036.SS）：近 120 日涨幅 2.7%，RSI ≈ 56.7，当前价格约 43。 股价站在 60 日线上方，趋势偏多，综合动量与技术评分位于样本前列。</div>
+</div>
+      </div>
 
-  <!-- 图表：核心持仓 -->
-  <div class='card'>
-    <h2>Core Holdings Charts</h2>
-    <div class='chart-card'>
+      <div class='card-soft' style='margin-top:14px;'>
+        <h2>Forced Holdings — Charts</h2>
+        <div class='section-title-line'></div>
+        <div class='chart-card'>
   <div class='chart-title'>VT</div>
   <img src='chart_VT.png' class='chart-img'>
 </div>
@@ -287,12 +327,12 @@ Last run: 7h 19m ago</pre>
   <div class='chart-title'>SPY</div>
   <img src='chart_SPY.png' class='chart-img'>
 </div>
-  </div>
+      </div>
 
-  <!-- 图表：动量 picks -->
-  <div class='card'>
-    <h2>Momentum Picks Charts</h2>
-    <div class='chart-card'>
+      <div class='card-soft' style='margin-top:14px;'>
+        <h2>Dynamic Picks — Charts</h2>
+        <div class='section-title-line'></div>
+        <div class='chart-card'>
   <div class='chart-title'>WDC</div>
   <img src='chart_WDC.png' class='chart-img'>
 </div>
@@ -304,12 +344,63 @@ Last run: 7h 19m ago</pre>
   <div class='chart-title'>WBD</div>
   <img src='chart_WBD.png' class='chart-img'>
 </div>
+      </div>
+
+      <div class='card-soft' style='margin-top:14px;'>
+        <h2>Backtest — 1Y Strategy Curve</h2>
+        <div class='section-title-line'></div>
+        <img src='backtest_equity.png' class='backtest-img'>
+      </div>
+    </div>
+
+    <!-- 右侧：时间/风险/文字总结 -->
+    <div class='col-right'>
+      <div class='card'>
+        <h1>SLou Daily Strategy</h1>
+        <div class='time-row'>
+          <div class='time-pill'>Beijing: 2025-11-23 18:48:32</div>
+          <div class='time-pill'>New York: 2025-11-23 05:48:32</div>
+          <div class='time-pill'>US Market: US Market Closed (Weekend).</div>
+          <div class='time-pill'>Version: 20251123.16</div>
+          <div class='time-pill'>Last Auto Run: 7h 12m ago</div>
+        </div>
+        <div style='margin-top:14px;'>
+          <span class='badge badge-riskon'>RISK_ON — SPY ≥ 200-day MA</span>
+          <span class='badge badge-hedge'>Hedge: Market normal → hedge usually not needed.</span>
+          <span class='badge badge-riskon'>Score: 68.9 / 100 (Fair)</span>
+        </div>
+      </div>
+
+      <div class='card-soft' style='margin-top:14px;'>
+        <h2>Strategy Notes</h2>
+        <div class='section-title-line'></div>
+        <pre>🔒 Forced holdings: VT, AOR, PLTR, VYM, SPY
+
+📈 Extra picks: WDC, MU, WBD
+
+🧺 Suggested portfolio:
+VT, AOR, PLTR, VYM, SPY, WDC, MU, WBD
+
+🛡 Hedge: Market normal → hedge usually not needed.
+
+⚠ Risk:
+SPY price : 659.03
+SPY MA200 : 612.3
+State     : RISK_ON — SPY ≥ 200-day MA
+
+🔄 Rebalance (medium-term):
+Medium-term strategy — last rebalance 0 days ago, wait about 3 more day(s) unless market regime changes.
+
+⏱ AutoRun:
+Last run: 7h 12m ago</pre>
+      </div>
+    </div>
+
   </div>
 
-  <div class='footer'>
-    Auto-generated by R · Medium-horizon strategy (no daily churn) · Version 20251123.15 · Not investment advice.
-  </div>
-
+  <p class='muted' style='margin-top:10px;text-align:center;'>
+    Auto-generated by R · Not investment advice · SLou Personal Strategy Dashboard
+  </p>
 </div>
 </body>
 </html>
